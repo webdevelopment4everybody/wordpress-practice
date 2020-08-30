@@ -61,7 +61,9 @@ td{
 .date-picker.selected span {
     border-bottom: 2px solid currentColor;
 }
-
+span{
+    pointer-events: none;
+}
 /* sunday */
 .date-picker:nth-child(1) {
   color: red;

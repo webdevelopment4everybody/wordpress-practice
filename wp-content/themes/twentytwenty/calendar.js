@@ -1,3 +1,6 @@
+
+
+
 function generate_year_range(start, end) {
     let years = "";
     for (let year = start; year <= end; year++) {
@@ -69,14 +72,13 @@ function showCalendar(month, year) {
                 break;
             } else {
                 cell = document.createElement("td");
-                cell.setAttribute("data-date", date);
+                cell3 = document.createElement("span");
+                cell.setAttribute("data_date", date);
                 cell.setAttribute("id", date );
-                cell.setAttribute("data-month", month + 1);
-                cell.setAttribute("data-year", year);
+                cell.setAttribute("data_month", month + 1);
+                cell.setAttribute("data_year", year);
                 cell.setAttribute("data-month_name", months[month]);
-                // cell.className = "date-picker";
-                cell.innerHTML = "<span>" + date + "</span><p>"+ date +"</p>";
-                // event(cell);
+                cell.innerHTML = '<span>'+date+'</span>';
                 if ( date === today.getDate() && year === today.getFullYear() && month === today.getMonth() ) {
                     cell.className = "date-picker selected";
                 }
@@ -89,16 +91,52 @@ function showCalendar(month, year) {
 }
 event();
 function event(cell){
-    // document.querySelector(cell.id).addEventListener("click", displayDate);
-// console.log(cell.id);
-document.getElementById('calendar-body').addEventListener('click',(e)=>{
-    e.target.style.backgroundColor = 'pink';
- 
-// prompt('Type here');
-console.log(e.target);
+    document.getElementById('calendar-body').addEventListener('click',(e)=>{
+        e.target.style.backgroundColor = 'pink';
+        // console.log(e.target);
+        var table = document.getElementsByTagName("table")[0];
+        for (var i = 0, row; row = table.rows[i]; i++) {
+            // console.log(row);
+            for (var j = 0, col; col = row.cells[j]; j++) {
+                // console.log(col.getAttribute("ivykis"));
+            }
+        }
+    let takeCell = document.getElementsByTagName("td");
+    let a= Object.values(data[0].content);
+    let b= Object.values(data[1].content);
+
+    
+    let HTML = ''; 
+    takeCell[20].setAttribute("ivykis",a);
+    takeCell[10].setAttribute("ivykis",b);
+    if(e.target.getAttribute("ivykis") != null ){
+        for (let i = 0; i < data.length; i++) {
+            HTML+=`
+            <div class="today-events">
+            <h2>Siandienos ivykiai: ${e.target.getAttribute("data_year")}.${e.target.getAttribute("data_month")}.${e.target.getAttribute("data_date")}</h2> 
+            <div class="data-time">${e.target.getAttribute("ivykis")}</div>
+            <span></span>
+            <div class="event"></div>
+            </div>
+            `;
+            // let tableRows = document.getElementsByTagName("table")[0].rows[3].cells[6].attributes[5];
+            // console.log(tableRows);
+            return  document.querySelector('.events-wrappers').innerHTML = HTML;
+            
+        }
+    } else {
+        HTML+=`
+        <div class="today-events">
+        <h2>Siandiena ivykiu nera</h2>
+        </div>
+        `;
+        return  document.querySelector('.events-wrappers').innerHTML = HTML;
+    }
 });
 }
 function daysInMonth(iMonth, iYear) {
     return 32 - new Date(iYear, iMonth, 32).getDate();
 }
 
+
+     

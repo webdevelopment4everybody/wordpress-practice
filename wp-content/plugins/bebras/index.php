@@ -107,32 +107,36 @@ wp_enqueue_script( 'js-file', get_template_directory_uri() . './script.js');
         </table>
     </div>
     <div class="events-wrappers">
-        <div class="previous-events">
+        <!-- <div class="previous-events">
             <h2>Nearest previous events</h2>
             <div class="data-time">DATE and TIME: 52258525</div>
             <span>Event:</span>
             <div class="event">ivykis</div>
-        </div>
-        <div class="today-events">
+        </div> -->
+        <!-- <div class="today-events">
             <h2>Todays events</h2>
             <div class="data-time">DATE and TIME: 465456</div>
             <span>Event:</span>
             <div class="event">event</div>
-        </div>
-        <div class="nearest-events">
+        </div> -->
+        <!-- <div class="nearest-events">
             <h2>Nearest events</h2>
             <div class="data-time">DATE and TIME: 7855</div>
             <span>Event:</span>
             <div class="event">wut</div>
-        </div>
+        </div> -->
     </div>
 </div>
 
 <?php
 }
 
+$get_file  = file_get_contents(get_template_directory_uri() . '/data.json');
+$json_to_array = json_decode($get_file,true);
+?>
 
+<script>
+    var data = <?php echo json_encode($json_to_array); ?>; 
+</script>
 
-
-
-    
+  
